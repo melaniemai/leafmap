@@ -1,21 +1,27 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { MdDelete } from "react-icons/md"
-import { FaCopy, FaCheck } from "react-icons/fa6"
+import { FaCopy } from "react-icons/fa6"
 import { Tooltip } from "react-tooltip"
 
-import './Markers.scss';
+import "./Markers.scss"
 
 export const Markers = () => {
   const [isCopied, setIsCopied] = useState(false)
   const markers = useSelector((state) => state.markers.markers)
   const totalMarkersCount = useSelector(
     (state) => state.markers.totalMarkersCount
-  );
+  )
 
-  const handleMarkerDelete = () => {
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      setIsCopied(false)
+    }, 2000);
 
-  };
+    return () => clearTimeout(timer)
+  }, [])
+
+  const handleMarkerDelete = () => {}
 
   const copyTextToClipboard = async (text) => {
     if ("clipboard" in navigator) {
@@ -26,19 +32,16 @@ export const Markers = () => {
   }
 
   const handleCoordsCopy = (e, pos) => {
-    e.preventDefault();
+    e.preventDefault()
     copyTextToClipboard(`[${pos}]`)
       .then(() => {
         // If successful, update the isCopied state value
         setIsCopied(true)
-        setTimeout(() => {
-          setIsCopied(false)
-        }, 3000)
       })
       .catch((err) => {
         console.log(err)
       })
-  };
+  }
 
   return (
     <div className="markers-container">
@@ -50,7 +53,14 @@ export const Markers = () => {
             return (
               <div className="marker-item" key={marker.id}>
                 <div className="marker-info-group">
-                  <div className="marker-item-name">Name: {marker.name}</div>
+                  <div
+                    className="marker-item-name"
+                    data-tooltip-id="marker-item-name"
+                    data-tooltip-content={`${marker.name}`}
+                  >
+                    Name: {marker.name}
+                    <Tooltip id="marker-item-name" />
+                  </div>
                   <div className="marker-item-position">
                     Position: {marker.position[0]}, {marker.position[1]}
                   </div>
@@ -68,14 +78,12 @@ export const Markers = () => {
                   <div
                     className="marker-item-copy"
                     data-tooltip-id="marker-item-copy"
-                    data-tooltip-content={`${isCopied ? 'Copied!' : 'Copy coordinates'}`}
+                    data-tooltip-content={`${
+                      isCopied ? "Copied!" : "Copy coordinates"
+                    }`}
                     onClick={(e) => handleCoordsCopy(e, marker.position)}
                   >
-                    {isCopied ? (
-                      <FaCheck className="icon copied" />
-                    ) : (
-                      <FaCopy className="icon copy" />
-                    )}
+                    <FaCopy className="icon copy" />
                     <Tooltip id="marker-item-copy" />
                   </div>
                 </div>
