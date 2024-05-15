@@ -8,17 +8,35 @@
   right: 0;
   width: 350px;
   max-height: 500px;
-  padding: 5px;
+  padding: 8px;
   margin: 5px;
-  background-color: #f2f2f2;
+  background-color: #F7F7FA;
   border: 2px solid rgba(0, 0, 0, 0.2);
   border-radius: 5px;
+  pointer-events: all;
+  cursor: default;
 
-  .panel-title {
-    font-size: font-size(18);
+  .panel-markers-title {
+    display: flex;
+    font-size: font-size(20);
+    font-weight: 500;
+    align-items: center;
+    vertical-align: middle;
+
+    .icon {
+      padding: 8px;
+    }
   }
 
   .reset-btn-container {
     display: flex;
+    margin: 5px 0;
+
+    .reset-btn {
+      background-color: #f2f2f2;
+      border: 2px solid rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+      cursor: pointer;
+    }
   }
 }

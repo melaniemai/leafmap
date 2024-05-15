@@ -9,19 +9,20 @@ const markersSlice = createSlice({
   reducers: {
     addMarker(state, action) {
       const newMarker = action.payload
-      const existingMarker = state.markers.find(
-        (marker) => marker.id === newMarker.id
-      )
+      // const existingMarker = state.markers.find(
+      //   (marker) => marker.id === newMarker.id
+      // )
       state.totalMarkersCount++
-      if (!existingMarker) {
+      // if (!existingMarker) {
         state.markers.push({
           id: newMarker.id,
           name: newMarker.name,
           position: newMarker.position,
         })
-      } else {
-        existingMarker.quantity++
-      }
+      // } 
+      // else {
+      //   existingMarker.quantity++ // need to fix
+      // }
     },
   },
 })

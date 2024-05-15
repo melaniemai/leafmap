@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import { DEFAULT_CENTER, DEFAULT_ZOOM } from "../../common";
 import { useMap } from "react-leaflet";
+import './Panel.scss';
 
 export const ResetBtn = () => {
   const map = useMap();
