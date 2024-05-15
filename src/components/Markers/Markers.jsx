@@ -1,12 +1,13 @@
-import { Fragment } from "react"
+import { useState } from "react"
 import { useSelector } from "react-redux"
 import { MdDelete } from "react-icons/md"
-import { FaCopy } from "react-icons/fa6"
+import { FaCopy, FaCheck } from "react-icons/fa6"
 import { Tooltip } from "react-tooltip"
 
 import './Markers.scss';
 
 export const Markers = () => {
+  const [isCopied, setIsCopied] = useState(false)
   const markers = useSelector((state) => state.markers.markers)
   const totalMarkersCount = useSelector(
     (state) => state.markers.totalMarkersCount
@@ -16,8 +17,27 @@ export const Markers = () => {
 
   };
 
-  const handleCoordsCopy = () => {
+  const copyTextToClipboard = async (text) => {
+    if ("clipboard" in navigator) {
+      return await navigator.clipboard.writeText(text)
+    } else {
+      return document.execCommand("copy", true, text)
+    }
+  }
 
+  const handleCoordsCopy = (e, pos) => {
+    e.preventDefault();
+    copyTextToClipboard(`[${pos}]`)
+      .then(() => {
+        // If successful, update the isCopied state value
+        setIsCopied(true)
+        setTimeout(() => {
+          setIsCopied(false)
+        }, 3000)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   };
 
   return (
@@ -48,10 +68,14 @@ export const Markers = () => {
                   <div
                     className="marker-item-copy"
                     data-tooltip-id="marker-item-copy"
-                    data-tooltip-content="Copy coordinates"
-                    onClick={handleCoordsCopy}
+                    data-tooltip-content={`${isCopied ? 'Copied!' : 'Copy coordinates'}`}
+                    onClick={(e) => handleCoordsCopy(e, marker.position)}
                   >
-                    <FaCopy className="icon" />
+                    {isCopied ? (
+                      <FaCheck className="icon copied" />
+                    ) : (
+                      <FaCopy className="icon copy" />
+                    )}
                     <Tooltip id="marker-item-copy" />
                   </div>
                 </div>

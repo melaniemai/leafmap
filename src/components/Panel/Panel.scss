@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 0;
+  bottom: 0;
   right: 0;
   width: 350px;
   max-height: 500px;
@@ -28,15 +28,34 @@
     }
   }
 
-  .reset-btn-container {
+  .panel-footer-container {
     display: flex;
-    margin: 5px 0;
+    flex-direction: row;
+    padding: 5px 0;
 
-    .reset-btn {
-      background-color: #f2f2f2;
-      border: 2px solid rgba(0, 0, 0, 0.2);
-      border-radius: 5px;
-      cursor: pointer;
+    .reset-btn-container {
+      display: flex;
+      margin: 5px;
+      margin-left: 0;
+  
+      .reset-btn {
+        background-color: #f2f2f2;
+        border: 2px solid rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
+  
+    .minimap-btn-container {
+      display: flex;
+      margin: 5px;
+
+      .minimap-btn {
+        background-color: #f2f2f2;
+        border: 2px solid rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        cursor: pointer;
+      }
     }
   }
 }
