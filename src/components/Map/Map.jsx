@@ -30,7 +30,7 @@ export const Map = () => {
       />
       {toggleMinimap && <MiniMapControl position="topright" />}
       <LocationMarker />
-      <Marker position={DEFAULT_CENTER}>
+      {/* <Marker position={DEFAULT_CENTER}>
         <Popup>
           <div onClick={handleClick}>
             A pretty CSS3 popup. <br /> Easily customizable.
@@ -57,7 +57,7 @@ export const Map = () => {
             A pretty CSS3 popup. <br /> Easily customizable.
           </div>
         </Popup>
-      </Marker>
+      </Marker> */}
       <Panel />
     </MapContainer>
   )
