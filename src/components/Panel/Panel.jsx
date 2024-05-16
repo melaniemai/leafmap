@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { ResetBtn } from "./ResetBtn"
 import { RiArrowUpSLine, RiArrowDownSLine } from "react-icons/ri"
 import { POSITION_CLASSES } from "../common"
@@ -18,7 +18,7 @@ export const Panel = () => {
     <div className={`panel-container ${POSITION_CLASSES.bottomright}`}>
       <div className="panel-markers-container">
         <div className="panel-markers-title" onClick={handleClickToggle}>
-          Saved Markers{" "}
+          Markers
           {show ? (
             <RiArrowUpSLine className="icon" />
           ) : (
@@ -26,11 +26,6 @@ export const Panel = () => {
           )}
         </div>
         {show && <Markers />}
-        <div className="panel-latest-marker-pos">
-          <span className="panel-latest-marker-pos-label">
-            {"Latest marker position: [x, x]"}
-          </span>
-        </div>
       </div>
       <div className="panel-footer-container">
         <ResetBtn />

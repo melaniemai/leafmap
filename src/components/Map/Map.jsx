@@ -1,5 +1,5 @@
 
-import { MapContainer, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, TileLayer, Popup } from "react-leaflet";
 import { DEFAULT_CENTER, DEFAULT_ZOOM } from "../common";
 import { Panel } from "../Panel/Panel";
 import './Map.scss';
@@ -15,17 +15,49 @@ export const Map = () => {
   
   const handleClick = () => {
     dispatch(markersActions.addMarker({id: uuidv4(), name: 'Testing a long name that should be too long', position: DEFAULT_CENTER }))
-    console.info('popup click');
   }
 
   return (
-    <MapContainer center={DEFAULT_CENTER} zoom={DEFAULT_ZOOM} className="map">
+    <MapContainer
+      center={DEFAULT_CENTER}
+      zoom={DEFAULT_ZOOM}
+      scrollWheelZoom={false}
+      className="map"
+    >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {toggleMinimap && <MiniMapControl position="topright" />}
-      <LocationMarker />   
+      <LocationMarker />
+      <Marker position={DEFAULT_CENTER}>
+        <Popup>
+          <div onClick={handleClick}>
+            A pretty CSS3 popup. <br /> Easily customizable.
+          </div>
+        </Popup>
+      </Marker>
+      <Marker position={[38.92966, -77.02971]}>
+        <Popup>
+          <div onClick={handleClick}>
+            A pretty CSS3 popup. <br /> Easily customizable.
+          </div>
+        </Popup>
+      </Marker>
+      <Marker position={[38.926182, -77.05764]}>
+        <Popup>
+          <div onClick={handleClick}>
+            A pretty CSS3 popup. <br /> Easily customizable.
+          </div>
+        </Popup>
+      </Marker>
+      <Marker position={[38.926182, -77.05784]}>
+        <Popup>
+          <div onClick={handleClick}>
+            A pretty CSS3 popup. <br /> Easily customizable.
+          </div>
+        </Popup>
+      </Marker>
       <Panel />
     </MapContainer>
   )

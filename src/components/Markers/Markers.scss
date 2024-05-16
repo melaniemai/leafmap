@@ -5,6 +5,8 @@
   background-color: #F2F2F5;
   border-radius: $BASE_BORDER_RADIUS;
   padding: $BASE_PADDING_UNIT;
+  max-height: 200px;
+  overflow-y: scroll;
 
   .mapped-markers-container {
     display: flex;

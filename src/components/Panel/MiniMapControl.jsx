@@ -24,7 +24,7 @@ export const MiniMapControl = ({ position, zoom }) => {
         <MiniMapBounds parentMap={parentMap} zoom={mapZoom} />
       </MapContainer>
     ),
-    []
+    [mapZoom, parentMap]
   );
 
   const positionClass =
