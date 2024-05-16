@@ -1,4 +1,4 @@
-@import '/src/common.scss'; 
+@import '/src/components/common.scss'; 
 
 .panel-container {
   display: flex;
@@ -8,52 +8,48 @@
   right: 0;
   width: 350px;
   max-height: 500px;
-  padding: 8px;
-  margin: 5px;
+  padding: $BASE_PADDING_UNIT + 3;
+  margin: $BASE_MARGIN_UNIT;
   background-color: #F7F7FA;
   border: 2px solid rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
+  border-radius: $BASE_BORDER_RADIUS;
   pointer-events: all;
   cursor: default;
 
   .panel-markers-title {
     display: flex;
-    font-size: font-size(20);
+    font-size: font-size(18);
     font-weight: 500;
     align-items: center;
     vertical-align: middle;
 
     .icon {
-      padding: 8px;
+      padding: $BASE_PADDING_UNIT + 3;
+    }
+  }
+
+  .panel-latest-marker-pos {
+    padding: $BASE_PADDING_UNIT;
+
+    .panel-latest-marker-pos-label {
+      font-size: font-size(14);
     }
   }
 
   .panel-footer-container {
     display: flex;
     flex-direction: row;
-    padding: 5px 0;
+    padding: $BASE_PADDING_UNIT 0;
 
-    .reset-btn-container {
+    .panel-footer-item {
       display: flex;
-      margin: 5px;
+      margin: $BASE_MARGIN_UNIT;
       margin-left: 0;
   
-      .reset-btn {
+      .panel-footer-item-btn {
         background-color: #f2f2f2;
         border: 2px solid rgba(0, 0, 0, 0.2);
-        border-radius: 5px;
-        cursor: pointer;
-      }
-    }
-  
-    .minimap-btn-container {
-      display: flex;
-      margin: 5px;
-
-      .minimap-btn {
-        background-color: #f2f2f2;
-        border: 2px solid rgba(0, 0, 0, 0.2);
-        border-radius: 5px;
+        border-radius: $BASE_BORDER_RADIUS;
         cursor: pointer;
       }
     }

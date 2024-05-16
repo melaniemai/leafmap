@@ -1,10 +1,10 @@
-@import '/src/common.scss'; 
+@import '/src/components/common.scss'; 
 
 .markers-container {
   font-size: font-size(14);
   background-color: #F2F2F5;
-  border-radius: 5px;
-  padding: 5px;
+  border-radius: $BASE_BORDER_RADIUS;
+  padding: $BASE_PADDING_UNIT;
 
   .mapped-markers-container {
     display: flex;
@@ -13,7 +13,7 @@
     .marker-item {
       display: flex;
       flex-direction: row;
-      padding: 5px;
+      padding: $BASE_PADDING_UNIT;
       border-bottom: 1px solid #8F90A6;
   
       .marker-info-group {

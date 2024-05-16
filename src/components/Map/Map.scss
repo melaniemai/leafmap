@@ -1,7 +1,9 @@
+@import '/src/components/common.scss'; 
+
 .map {
   width: 100vw;
   height: 100vh;
-  z-index: 1;
+  z-index: $MAP_ZINDEX;
 
   button {
     pointer-events: all;

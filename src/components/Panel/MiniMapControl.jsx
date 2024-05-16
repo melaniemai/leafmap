@@ -1,7 +1,7 @@
 import { useMemo } from "react"
 import { useMap, MapContainer, TileLayer } from "react-leaflet"
 import { MiniMapBounds } from "./MiniMapBounds"
-import { POSITION_CLASSES } from "../../common"
+import { POSITION_CLASSES } from "../common"
 
 export const MiniMapControl = ({ position, zoom }) => {
   const parentMap = useMap()

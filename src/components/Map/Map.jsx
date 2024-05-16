@@ -1,12 +1,13 @@
 
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { DEFAULT_CENTER, DEFAULT_ZOOM } from "../../common";
+import { MapContainer, TileLayer } from "react-leaflet";
+import { DEFAULT_CENTER, DEFAULT_ZOOM } from "../common";
 import { Panel } from "../Panel/Panel";
 import './Map.scss';
 import { useDispatch, useSelector } from "react-redux";
-import { markersActions } from "../../store/slices/markers-slice";
-import { v4 as uuidv4 } from "uuid"
 import { MiniMapControl } from "../Panel/MiniMapControl";
+import LocationMarker from "../Markers/LocationMarker";
+import { markersActions } from "../../store/slices/markers-slice";
+import { v4 as uuidv4 } from "uuid";
 
 export const Map = () => {
   const dispatch = useDispatch();
@@ -24,34 +25,7 @@ export const Map = () => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {toggleMinimap && <MiniMapControl position="topright" />}
-      <Marker position={DEFAULT_CENTER}>
-        <Popup>
-          <div onClick={handleClick}>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </div>
-        </Popup>
-      </Marker>
-      <Marker position={[38.92966, -77.02971]}>
-        <Popup>
-          <div onClick={handleClick}>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </div>
-        </Popup>
-      </Marker>
-      <Marker position={[38.926182, -77.05764]}>
-        <Popup>
-          <div onClick={handleClick}>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </div>
-        </Popup>
-      </Marker>
-      <Marker position={[39.54895, -83.42109]}>
-        <Popup>
-          <div onClick={handleClick}>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </div>
-        </Popup>
-      </Marker>
+      <LocationMarker />   
       <Panel />
     </MapContainer>
   )

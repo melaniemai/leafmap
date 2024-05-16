@@ -1,7 +1,7 @@
 import { useCallback, useState, useMemo } from "react"
 import { useMap, useMapEvent, Rectangle } from "react-leaflet"
 import { useEventHandlers } from "@react-leaflet/core"
-import { BOUNDS_STYLE } from "../../common"
+import { BOUNDS_STYLE } from "../common"
 
 export const MiniMapBounds = ({ parentMap, zoom}) => {
   const minimap = useMap()

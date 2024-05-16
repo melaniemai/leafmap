@@ -1,11 +1,11 @@
 import { useState } from "react"
 import { ResetBtn } from "./ResetBtn"
 import { RiArrowUpSLine, RiArrowDownSLine } from "react-icons/ri"
-import { POSITION_CLASSES } from "../../common"
+import { POSITION_CLASSES } from "../common"
 import Markers from "../Markers/Markers"
+import { MiniMapBtn } from "./MiniMapBtn"
 
 import "./Panel.scss"
-import { MiniMapBtn } from "./MiniMapBtn"
 
 export const Panel = () => {
   const [show, setShow] = useState(false)
@@ -26,6 +26,11 @@ export const Panel = () => {
           )}
         </div>
         {show && <Markers />}
+        <div className="panel-latest-marker-pos">
+          <span className="panel-latest-marker-pos-label">
+            {"Latest marker position: [x, x]"}
+          </span>
+        </div>
       </div>
       <div className="panel-footer-container">
         <ResetBtn />
