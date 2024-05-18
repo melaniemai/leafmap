@@ -9,20 +9,19 @@ const markersSlice = createSlice({
   reducers: {
     addMarker(state, action) {
       const newMarker = action.payload
-      // const existingMarker = state.markers.find(
-      //   (marker) => marker.id === newMarker.id
-      // )
+      state.markers.push({
+        id: newMarker.id,
+        name: newMarker.id,
+        position: newMarker.position,
+      })
       state.totalMarkersCount++
-      // if (!existingMarker) {
-        state.markers.push({
-          id: newMarker.id,
-          name: newMarker.name,
-          position: newMarker.position,
-        })
-      // } 
-      // else {
-      //   existingMarker.quantity++ // need to fix
-      // }
+    },
+    removeMarker(state, action) {
+      const markerToRemove = action.payload
+      state.markers = state.markers.filter(
+        (marker) => marker.id !== markerToRemove
+      );
+      state.totalMarkersCount--;
     },
   },
 })

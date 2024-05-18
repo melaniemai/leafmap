@@ -12,14 +12,13 @@ import { markersActions } from "../../store/slices/markers-slice"
 import { v4 as uuidv4 } from "uuid"
 import { useIsMount } from "../../hooks/hooks"
 
-const LocationMarker = () => {
+const LocationMarker = ({ markerRef }) => {
   const dispatch = useDispatch()
   const isMount = useIsMount()
-
   const [markers, setMarkers] = useState([])
   const uniqueMarkers = useMemo(() => [...new Set(markers)], [markers])
-
-  const map = useMapEvents({
+  
+  useMapEvents({
     click(e) {
       markers.push(e.latlng)
       setMarkers((prevValue) => [...prevValue, e.latlng])
@@ -30,11 +29,9 @@ const LocationMarker = () => {
     if (isMount) {
       return
     } else {
-      console.info(uniqueMarkers.at(-1)[0])
       dispatch(
         markersActions.addMarker({
           id: uuidv4(),
-          name: "",
           position: [
             uniqueMarkers.at(-1)?.["lat"],
             uniqueMarkers.at(-1)?.["lng"],
@@ -44,11 +41,19 @@ const LocationMarker = () => {
     }
   }, [dispatch, isMount, uniqueMarkers])
 
+  const handleRemoveMarkers = (id) => {
+    dispatch(markersActions.removeMarker(id));
+  };
+
   return (
     <Fragment>
       {markers.map((marker) => (
-        <Marker position={marker}>
-          <Popup>grsvdwsv</Popup>
+        <Marker ref={markerRef} position={marker} key={marker.id}>
+          <Popup key={marker.id}>
+            <div onClick={handleRemoveMarkers}>
+              {`[ ${marker.lat}, ${marker.lng} ]`}
+            </div>
+          </Popup>
         </Marker>
       ))}
     </Fragment>

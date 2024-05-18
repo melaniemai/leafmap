@@ -7,15 +7,17 @@ export const MiniMapBtn = () => {
   const dispatch = useDispatch()
     const toggleMinimap = useSelector((state) => state.minimap.showMinimap)
 
-  const handleMinimapBtnClick = () => {
+  const handleMinimapBtnClick = (e) => {
+    e.preventDefault();
     dispatch(minimapActions.toggleMinimap());
   }
 
   return (
     <div className="minimap-btn-container panel-footer-item">
       <button
+        type="text"
         className="minimap-btn panel-footer-item-btn"
-        onClick={handleMinimapBtnClick}
+        onClick={(e) => handleMinimapBtnClick(e)}
         data-tooltip-id="minimap-btn"
         data-tooltip-content="Add/hide minimap on map"
       >

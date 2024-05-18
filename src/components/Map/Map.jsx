@@ -1,64 +1,53 @@
 
-import { MapContainer, Marker, TileLayer, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import { DEFAULT_CENTER, DEFAULT_ZOOM } from "../common";
 import { Panel } from "../Panel/Panel";
 import './Map.scss';
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { MiniMapControl } from "../Panel/MiniMapControl";
 import LocationMarker from "../Markers/LocationMarker";
-import { markersActions } from "../../store/slices/markers-slice";
-import { v4 as uuidv4 } from "uuid";
+import { useRef, useCallback } from "react";
+import { ResetBtn } from "../Panel/ResetBtn";
+import { MiniMapBtn } from "../Panel/MiniMapBtn";
 
 export const Map = () => {
-  const dispatch = useDispatch();
+  const mapRef = useRef(null)
+  const markerRef = useRef(null);
+
   const toggleMinimap = useSelector((state) => state.minimap.showMinimap);
-  
-  const handleClick = () => {
-    dispatch(markersActions.addMarker({id: uuidv4(), name: 'Testing a long name that should be too long', position: DEFAULT_CENTER }))
+
+  const onClickShowMarker = () => {
+    const map = mapRef.current
+    if (!map) {
+      return
+    }
+
+    map.flyTo(DEFAULT_CENTER, 13)
+
+    const marker = markerRef.current
+    if (marker) {
+      marker.openPopup()
+    }
   }
 
   return (
-    <MapContainer
-      center={DEFAULT_CENTER}
-      zoom={DEFAULT_ZOOM}
-      scrollWheelZoom={false}
-      className="map"
-    >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      {toggleMinimap && <MiniMapControl position="topright" />}
-      <LocationMarker />
-      {/* <Marker position={DEFAULT_CENTER}>
-        <Popup>
-          <div onClick={handleClick}>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </div>
-        </Popup>
-      </Marker>
-      <Marker position={[38.92966, -77.02971]}>
-        <Popup>
-          <div onClick={handleClick}>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </div>
-        </Popup>
-      </Marker>
-      <Marker position={[38.926182, -77.05764]}>
-        <Popup>
-          <div onClick={handleClick}>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </div>
-        </Popup>
-      </Marker>
-      <Marker position={[38.926182, -77.05784]}>
-        <Popup>
-          <div onClick={handleClick}>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </div>
-        </Popup>
-      </Marker> */}
-      <Panel />
-    </MapContainer>
+    <div className="main-container">
+      <MapContainer
+        center={DEFAULT_CENTER}
+        zoom={DEFAULT_ZOOM}
+        scrollWheelZoom={false}
+        className="map"
+        ref={mapRef}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        {toggleMinimap && <MiniMapControl position="topright" />}
+        <LocationMarker ref={markerRef} />
+      </MapContainer>
+      <Panel ref={mapRef} />
+      {/* <button onClick={onClickShowMarker}>Show marker</button> */}
+    </div>
   )
 };

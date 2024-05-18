@@ -3,29 +3,32 @@
 .panel-container {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 350px;
-  max-height: 500px;
+  width: 25vw;
   padding: $BASE_PADDING_UNIT + 3;
-  margin: $BASE_MARGIN_UNIT;
   background-color: #F7F7FA;
   border: 2px solid rgba(0, 0, 0, 0.2);
   border-radius: $BASE_BORDER_RADIUS;
-  pointer-events: all;
+  pointer-events: auto;
   cursor: default;
+  z-index: $MAP_ZINDEX + 999;
 
   .panel-markers-title {
     display: flex;
     font-size: font-size(18);
-    font-weight: 500;
+    font-weight: 600;
     align-items: center;
     vertical-align: middle;
+    padding: $BASE_PADDING_UNIT*2 $BASE_PADDING_UNIT;
 
     .icon {
       padding: $BASE_PADDING_UNIT + 3;
     }
+  }
+
+  .panel-markers-sub {
+    display: flex;
+    font-size: font-size(12);
+    padding: $BASE_PADDING_UNIT;
   }
 
   .panel-footer-container {
