@@ -17,8 +17,8 @@ export const Panel = ({ mapRef }) => {
         <Markers />
       </div>
       <div className="panel-footer-container">
-        {/* <ResetBtn />
-        <MiniMapBtn /> */}
+        <ResetBtn />
+        {/* <MiniMapBtn /> */}
       </div>
     </div>
   )

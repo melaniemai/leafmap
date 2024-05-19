@@ -5,12 +5,12 @@ import { Tooltip } from 'react-tooltip';
 import './Panel.scss';
 
 export const ResetBtn = () => {
-  const map = useMap();
+  // const map = useMap();
 
   const handleResetClick = useCallback((e) => {
-    e.preventDefault();
-    map.setView(DEFAULT_CENTER, DEFAULT_ZOOM)
-  }, [map]);
+    // e.preventDefault();
+    // map.setView(DEFAULT_CENTER, DEFAULT_ZOOM)
+  }, []);
 
   return (
     <div className="reset-btn-container panel-footer-item">

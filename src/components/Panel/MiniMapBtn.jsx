@@ -8,8 +8,8 @@ export const MiniMapBtn = () => {
     const toggleMinimap = useSelector((state) => state.minimap.showMinimap)
 
   const handleMinimapBtnClick = (e) => {
-    e.preventDefault();
-    dispatch(minimapActions.toggleMinimap());
+    // e.preventDefault();
+    // dispatch(minimapActions.toggleMinimap());
   }
 
   return (

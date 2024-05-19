@@ -28,7 +28,11 @@ export const Map = () => {
     if (marker) {
       marker.openPopup()
     }
-  }
+  };
+
+  const resetPosition = useCallback(() => {
+
+  }, []);
 
   return (
     <div className="main-container">
