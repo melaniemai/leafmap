@@ -1,37 +1,42 @@
 
-import { MapContainer, TileLayer, useMap } from "react-leaflet";
+import { MapContainer, TileLayer } from "react-leaflet";
 import { DEFAULT_CENTER, DEFAULT_ZOOM } from "../common";
 import { Panel } from "../Panel/Panel";
-import './Map.scss';
 import { useSelector } from "react-redux";
 import { MiniMapControl } from "../Panel/MiniMapControl";
 import LocationMarker from "../Markers/LocationMarker";
 import { useRef, useCallback } from "react";
-import { ResetBtn } from "../Panel/ResetBtn";
+import { ResetBtn } from "../Buttons/ResetBtn";
 import { MiniMapBtn } from "../Panel/MiniMapBtn";
+import './Map.scss';
 
 export const Map = () => {
-  const mapRef = useRef(null)
+  const mapRef = useRef(null);
   const markerRef = useRef(null);
-
   const toggleMinimap = useSelector((state) => state.minimap.showMinimap);
 
-  const onClickShowMarker = () => {
-    const map = mapRef.current
+  // const onClickShowMarker = () => {
+  //   const map = mapRef.current
+  //   if (!map) {
+  //     return
+  //   }
+
+  //   map.flyTo(DEFAULT_CENTER, 13)
+
+  //   const marker = markerRef.current
+  //   if (marker) {
+  //     marker.openPopup()
+  //   }
+  // }
+
+  const handleResetClick = useCallback((e) => {
+    e.preventDefault();
+    const map = mapRef.current;
     if (!map) {
-      return
-    }
+      return;
+    };
 
-    map.flyTo(DEFAULT_CENTER, 13)
-
-    const marker = markerRef.current
-    if (marker) {
-      marker.openPopup()
-    }
-  };
-
-  const resetPosition = useCallback(() => {
-
+    map.flyTo(DEFAULT_CENTER, 13);
   }, []);
 
   return (
@@ -50,7 +55,15 @@ export const Map = () => {
         {toggleMinimap && <MiniMapControl position="topright" />}
         <LocationMarker ref={markerRef} />
       </MapContainer>
-      <Panel ref={mapRef} />
+      <div className="sub-wrapper">
+        <div className="panel-wrapper">
+          <Panel ref={mapRef} />
+        </div>
+        <div className="footer-wrapper">
+          <ResetBtn handleResetClick={handleResetClick} />
+          <MiniMapBtn />
+        </div>
+      </div>
       {/* <button onClick={onClickShowMarker}>Show marker</button> */}
     </div>
   )

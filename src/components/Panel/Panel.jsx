@@ -1,4 +1,3 @@
-import { ResetBtn } from "./ResetBtn"
 import { POSITION_CLASSES } from "../common"
 import Markers from "../Markers/Markers"
 import { MiniMapBtn } from "./MiniMapBtn"
@@ -16,10 +15,9 @@ export const Panel = ({ mapRef }) => {
         <span className="panel-markers-sub">Click on list item to travel to marker position on map.</span>
         <Markers />
       </div>
-      <div className="panel-footer-container">
-        <ResetBtn />
+      {/* <div className="panel-footer-container"> */}
         {/* <MiniMapBtn /> */}
-      </div>
+      {/* </div> */}
     </div>
   )
 }

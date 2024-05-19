@@ -9,7 +9,28 @@
     z-index: $MAP_ZINDEX;
   }
 
-  .ppp {
-    max-width: 20vw;
+  .sub-wrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: #F7F7FA;
+
+
+    .panel-wrapper {
+      display: flex;
+    }
+  
+    .footer-wrapper {
+      display: flex;
+      flex-direction: row;
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      padding: $BASE_PADDING_UNIT;
+      margin: $BASE_MARGIN_UNIT;
+
+      .footer-wrapper-item {
+        margin-left: $BASE_MARGIN_UNIT;
+      }
+    }
   }
 }
