@@ -17,8 +17,6 @@ const LocationMarker = ({ markerRef }) => {
   const isMount = useIsMount();
   const [markers, setMarkers] = useState([]);
   const uniqueMarkers = useMemo(() => [...new Set(markers)], [markers]);
-  const toggleMinimap = useSelector((state) => state.minimap.showMinimap);
-
   
   useMapEvents({
     click(e) {
@@ -28,8 +26,7 @@ const LocationMarker = ({ markerRef }) => {
   })
 
   useEffect(() => {
-    if (isMount || toggleMinimap) { // toggleMinimap can cause add marker when first mounted
-      return
+    if (isMount) {
     } else {
       dispatch(
         markersActions.addMarker({

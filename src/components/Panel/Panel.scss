@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: column;
   width: 25vw;
-  padding: $BASE_PADDING_UNIT + 3;
   background-color: #F7F7FA;
   pointer-events: auto;
   cursor: default;
@@ -31,7 +30,9 @@
   .panel-footer-container {
     display: flex;
     flex-direction: row;
-    padding: $BASE_PADDING_UNIT 0;
+    padding: $BASE_PADDING_UNIT;
+    margin: $BASE_MARGIN_UNIT * 2;
+    justify-content: space-evenly;
 
     .panel-footer-item {
       display: flex;
