@@ -1,23 +1,27 @@
 import { ResetBtn } from "../Buttons/ResetBtn"
-import { POSITION_CLASSES } from "../common"
 import Markers from "../Markers/Markers"
-import { MiniMapBtn } from "./MiniMapBtn"
+import CoordsSection from "./CoordsSection"
 
 import "./Panel.scss"
 import { useSelector } from "react-redux"
 
-export const Panel = ({ handleResetClick }) => {
+export const Panel = ({ handleResetClick, handleMarkerItemClick }) => {
   const markersCount = useSelector((state) => state.markers.totalMarkersCount)
 
   return (
     <div className={`panel-container`}>
       <div className="panel-markers-container">
         <div className="panel-markers-title">{`Markers (${markersCount})`}</div>
-        <span className="panel-markers-sub">Click on list item to travel to marker position on map.</span>
-        <Markers />
+        <span className="panel-markers-sub">
+          Click on a list item to travel to and copy coordinates.
+        </span>
+        <Markers
+          handleMarkerItemClick={handleMarkerItemClick}
+        />
       </div>
       <div className="panel-footer-container">
-        <ResetBtn handleResetClick={handleResetClick} />
+        <CoordsSection />
+        <ResetBtn handleResetClick={(e) => handleResetClick(e)} />
       </div>
     </div>
   )

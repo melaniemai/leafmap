@@ -1,10 +1,8 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import {
   useState,
   Fragment,
   useEffect,
-  useCallback,
-  useRef,
   useMemo,
 } from "react"
 import { useMapEvents, Marker, Popup } from "react-leaflet"
@@ -40,16 +38,12 @@ const LocationMarker = ({ markerRef }) => {
     }
   }, [dispatch, isMount, uniqueMarkers])
 
-  const handleRemoveMarkers = (id) => {
-    dispatch(markersActions.removeMarker(id));
-  };
-
   return (
     <Fragment>
       {markers.map((marker) => (
         <Marker ref={markerRef} position={marker} key={marker.id}>
           <Popup key={marker.id}>
-            <div onClick={handleRemoveMarkers}>
+            <div>
               {`[ ${marker.lat}, ${marker.lng} ]`}
             </div>
           </Popup>

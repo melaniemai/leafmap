@@ -2,27 +2,73 @@
 import { MapContainer, TileLayer } from "react-leaflet";
 import { DEFAULT_CENTER, DEFAULT_ZOOM } from "../common";
 import { Panel } from "../Panel/Panel";
-import { useDispatch } from "react-redux";
-import { MiniMapControl } from "../Panel/MiniMapControl";
+import { MiniMapControl } from "./MiniMapControl";
 import LocationMarker from "../Markers/LocationMarker";
-import { useRef, useCallback } from "react";
-import { ResetBtn } from "../Buttons/ResetBtn";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { ToastContainer, toast } from "react-toastify";
+
 import './Map.scss';
+import "react-toastify/dist/ReactToastify.css";
 
 export const Map = () => {
-  const dispatch = useDispatch();
-  const mapRef = useRef(null);
-  const markerRef = useRef(null);
+  const mapRef = useRef(null)
+  const markerRef = useRef(null)
+  const [isCopied, setIsCopied] = useState(false)
+
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      setIsCopied(false)
+    }, 1000);
+
+    return () => clearTimeout(timer)
+  }, [])
 
   const handleResetClick = useCallback((e) => {
-    e.preventDefault();
-    const map = mapRef.current;
+    e.preventDefault()
+    const map = mapRef.current
     if (!map) {
-      return;
-    };
+      return
+    }
 
-    map.flyTo(DEFAULT_CENTER, 13);
-  }, []);
+    map.flyTo(DEFAULT_CENTER, 13)
+  }, [])
+
+  const handleCoordsCopy = useCallback((e, pos) => {
+    e.preventDefault()
+    copyTextToClipboard(`${pos}`)
+      .then(() => {
+        // If successful, update the isCopied state value
+        setIsCopied(true)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
+  
+  const copyTextToClipboard = async (text) => {
+    if ("clipboard" in navigator) {
+      return await navigator.clipboard.writeText(text)
+    } else {
+      return document.execCommand("copy", true, text)
+    }
+  }
+
+  const handleMarkerItemClick = useCallback((e, pos) => {
+    e.preventDefault()
+    const map = mapRef.current
+    if (!map) {
+      return
+    }
+
+    handleCoordsCopy(e, pos);
+    map.flyTo(pos, 13)
+    toast.success("Coordinates copied!", {
+      position: "bottom-right",
+      closeOnClick: true,
+      hideProgressBar: true,
+      theme: "dark",
+    })
+  }, [handleCoordsCopy])
 
   return (
     <div className="main-container">
@@ -40,11 +86,16 @@ export const Map = () => {
           />
           <MiniMapControl position="topright" />
           <LocationMarker ref={markerRef} />
+          <ToastContainer autoClose={1000} />
         </MapContainer>
       </div>
       <div className="sub-wrapper">
         <div className="panel-wrapper">
-          <Panel ref={mapRef} handleResetClick={handleResetClick} />
+          <Panel
+            ref={mapRef}
+            handleResetClick={handleResetClick}
+            handleMarkerItemClick={handleMarkerItemClick}
+          />
         </div>
       </div>
     </div>
