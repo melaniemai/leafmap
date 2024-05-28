@@ -1,6 +1,7 @@
 {
   "name": "leaf",
   "version": "0.1.0",
+  "homepage": "https://melaniemai.github.io/leafmap",
   "private": true,
   "dependencies": {
     "@react-leaflet/core": "^2.1.0",
