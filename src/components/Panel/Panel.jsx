@@ -20,7 +20,7 @@ export const Panel = ({ handleResetClick, handleMarkerItemClick }) => {
         />
       </div>
       <div className="panel-footer-container">
-        <CoordsSection />
+        <CoordsSection handleMarkerItemClick={handleMarkerItemClick}/>
         <ResetBtn handleResetClick={(e) => handleResetClick(e)} />
       </div>
     </div>

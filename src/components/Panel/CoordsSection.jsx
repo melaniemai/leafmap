@@ -1,11 +1,14 @@
+import { useState } from 'react';
 import '../Panel/Panel.scss';
 
-const CoordsSection = () => {
+const CoordsSection = ({ handleMarkerItemClick }) => {
 
   const getEnteredCoords = () => {
-    const inputData = document.getElementsByName("coords-input-box")[0].value;
-    console.info(inputData)
+    const input = document.getElementsByName("coords-input-box")[0].value;
+    return input.split(',');
   };
+
+  const pos = getEnteredCoords();
 
   return (
     <div className="coords-sect-container footer-wrapper-item">
@@ -16,10 +19,12 @@ const CoordsSection = () => {
         <input type="text" placeholder="Ex: Lng,Lat" name="coords-input-box" />
       </div>
       <div className="coords-btns">
-        <button className="go-to-coords-btn" onClick={getEnteredCoords}>
+        <button
+          className="go-to-coords-btn"
+          onClick={(e) => handleMarkerItemClick(e, pos)}
+        >
           Go to coordinates
         </button>
-        <button className="add-at-coords-btn">Add marker at coordinates</button>
       </div>
     </div>
   )
