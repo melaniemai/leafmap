@@ -4,7 +4,7 @@ import '../Panel/Panel.scss';
 const CoordsSection = ({ handleMarkerItemClick }) => {
 
   const getEnteredCoords = () => {
-    const input = document.getElementsByName("coords-input-box")[0].value;
+    const input = document.getElementsByName("coords-input-box")[0]?.value;
     return input.split(',');
   };
 
