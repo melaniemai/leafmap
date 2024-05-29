@@ -5,7 +5,7 @@ const CoordsSection = ({ handleMarkerItemClick }) => {
 
   const getEnteredCoords = () => {
     const input = document.getElementsByName("coords-input-box")[0]?.value;
-    return input.split(',');
+    return input?.split(',');
   };
 
   const pos = getEnteredCoords();
