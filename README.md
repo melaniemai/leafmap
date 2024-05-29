@@ -17,3 +17,4 @@ npm install
 npm start
 ```
 
+![main](https://github.com/melaniemai/leafmap/assets/44130793/ae039a1c-28dc-42f2-ae7d-36314fa6af9c)
