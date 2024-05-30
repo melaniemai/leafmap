@@ -2,6 +2,8 @@
 
 This is a starting project working with React components for Leaflet maps.
 
+This project is recommended to be viewed on desktop.
+
 https://melaniemai.github.io/leafmap/
 
 ## Getting Started
